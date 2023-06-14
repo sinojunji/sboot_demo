@@ -1,8 +1,8 @@
 package com.turling.demo.controller;
 
 import com.turling.demo.config.MessageObject;
-import com.turling.demo.entity.Post;
-import com.turling.demo.service.IPostService;
+
+import com.turling.demo.service.impl.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,14 +16,12 @@ import java.util.List;
 public class BaseController {
 
     @Resource
-    private IPostService postService;
+    private UserService userService;
 
     @PostMapping("/query")
     @ResponseBody
     public MessageObject findPost(){
-        List<Post> postList = postService.findAll();
-
-        return new MessageObject(MessageObject.OK,"",postList);
+        return new MessageObject(MessageObject.OK,"",userService.selectAll());
     }
 
 }
